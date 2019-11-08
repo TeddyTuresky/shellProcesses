@@ -1,0 +1,32 @@
+#!/bin/bash
+
+cd /Users/SilverSalmon/Pictures/Photos\ Library.photoslibrary/Masters/2017
+
+one=(`ls`)
+none=${#one[*]}
+
+for ((i=0; i<none; i++)); do
+	two=(`ls ${one[i]}`)
+        ntwo=${#two[*]}
+	
+	for ((k=0; k<ntwo; k++)); do
+        	three=(`ls ${one[i]}/${two[k]}`)
+        	nthree=${#three[*]}
+		
+		for ((l=0; l<nthree; l++)); do
+			four=(`ls ${one[i]}/${two[k]}/${three[l]}`)
+			nfour=${#four[*]}
+	
+			for ((m=0; m<nfour; m++)); do
+				arr=(`ls`); #echo ${arr[*]}			
+				if [[ ${arr[*]} == *${four[m]}* ]]; then
+					echo ${one[i]}/${two[k]}/${three[l]}/${four[m]} is repeat
+				else
+					cp ${one[i]}/${two[k]}/${three[l]}/${four[m]} ./
+				fi
+			done
+		done
+	done
+done
+
+echo done copying
